@@ -6,7 +6,7 @@ import { shallowMount } from '@vue/test-utils'
 describe('Item.vue', () => {
   const item = {
     title: 'Item',
-    url: 10,
+    url: 'http://google.com',
     by: 'Pesho',
     score: 100
   }
@@ -44,6 +44,8 @@ describe('Item.vue', () => {
 
   test('renders a link to the item.url with item.title as text', () => {
     const wrapper = shallowMount(Item, { propsData: { item } })
-    expect(wrapper.find('a').text()).toContain(item.title)
+    const a = wrapper.find('a')
+    expect(a.text()).toBe(item.title)
+    expect(a.attributes().href).toBe(item.url)
   })
 })
