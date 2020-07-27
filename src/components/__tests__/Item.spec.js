@@ -4,6 +4,12 @@ import { mount } from '@vue/test-utils'
 import { shallowMount } from '@vue/test-utils'
 
 describe('Item.vue', () => {
+  const item = {
+    title: 'Item',
+    url: 10,
+    by: 'Pesho',
+    score: 100
+  }
   // manual mounting the component
   //   test('renders "item"', () => {
   //     //constructor function: a function used with the new operator
@@ -11,14 +17,33 @@ describe('Item.vue', () => {
   //     const vm = new Ctor().$mount() //creates a new Vue instance, and mounts the Vue instance
   //     expect(vm.$el.textContent).toContain('item') //accesses the DOM element, and checks the text content
   //   })
-
   // using Vue Test Utils to mounting the component
-  test('renders "item"', () => {
-    //returns a wrapper containing a mounted Item
-    //const wrapper = mount(Item) //mount method render entire component tree
-    const wrapper = shallowMount(Item) //shallowMount renders the component tree only one level deep (stubs all the children of a component before it mounts it)
-    debugger
-    //check textContent of the instance element
-    expect(wrapper.text()).toContain('item')
+  //   test('renders "item"', () => {
+  //     //returns a wrapper containing a mounted Item
+  //     //const wrapper = mount(Item) //mount method render entire component tree
+  //     const wrapper = shallowMount(Item) //shallowMount renders the component tree only one level deep (stubs all the children of a component before it mounts it)
+  //     //debugger //set a debugger statement
+  //     //check textContent of the instance element
+  //     expect(wrapper.text()).toContain('item')
+  //   })
+
+  test('renders item.url', () => {
+    const wrapper = shallowMount(Item, { propsData: { item } })
+    expect(wrapper.text()).toContain(item.url)
+  })
+
+  test('renders item.by', () => {
+    const wrapper = shallowMount(Item, { propsData: { item } })
+    expect(wrapper.text()).toContain(item.by)
+  })
+
+  test('renders item.score', () => {
+    const wrapper = shallowMount(Item, { propsData: { item } })
+    expect(wrapper.text()).toContain(item.score)
+  })
+
+  test('renders a link to the item.url with item.title as text', () => {
+    const wrapper = shallowMount(Item, { propsData: { item } })
+    expect(wrapper.find('a').text()).toContain(item.title)
   })
 })
