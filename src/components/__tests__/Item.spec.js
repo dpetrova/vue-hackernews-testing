@@ -29,23 +29,28 @@ describe('Item.vue', () => {
 
   test('renders item.url', () => {
     const wrapper = shallowMount(Item, { propsData: { item } })
+    //testing text content of elements
     expect(wrapper.text()).toContain(item.url)
   })
 
   test('renders item.by', () => {
     const wrapper = shallowMount(Item, { propsData: { item } })
+    //testing text content of elements
     expect(wrapper.text()).toContain(item.by)
   })
 
   test('renders item.score', () => {
     const wrapper = shallowMount(Item, { propsData: { item } })
+    //testing text content of elements
     expect(wrapper.text()).toContain(item.score)
   })
 
   test('renders a link to the item.url with item.title as text', () => {
     const wrapper = shallowMount(Item, { propsData: { item } })
     const a = wrapper.find('a')
+    //testing text content of elements
     expect(a.text()).toBe(item.title)
+    //testing DOM attributes
     expect(a.attributes().href).toBe(item.url)
   })
 })
