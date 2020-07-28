@@ -14,7 +14,7 @@ export default {
     Item
   },
   beforeMount() {
-    //this.loadItems()
+    this.loadItems()
   },
   data() {
     return {

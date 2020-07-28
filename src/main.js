@@ -4,9 +4,9 @@ import ProgressBar from './components/ProgressBar'
 
 Vue.config.productionTip = false
 
-const bar = new Vue(ProgressBar).$mount()
-Vue.prototype.$bar = bar
-document.body.appendChild(bar.$el)
+const bar = new Vue(ProgressBar).$mount() //create a mounted ProgressBar instance
+Vue.prototype.$bar = bar //add the mounted progress bar to the base Vue constructor prototype, which will be available to child component instances
+document.body.appendChild(bar.$el) //add the ProgressBar root element to the body
 
 new Vue({
   render: h => h(App)
