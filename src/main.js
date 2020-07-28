@@ -1,16 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { fetchListData } from './api/api'
+import ProgressBar from './components/ProgressBar'
 
 Vue.config.productionTip = false
 
-function getTopItems() {
-  return fetchListData('top').then(items => items)
-}
+const bar = new Vue(ProgressBar).$mount()
+Vue.prototype.$bar = bar
+document.body.appendChild(bar.$el)
 
-getTopItems().then(items => {
-  window.items = items
-  new Vue({
-    render: h => h(App)
-  }).$mount('#app')
-})
+new Vue({
+  render: h => h(App)
+}).$mount('#app')
