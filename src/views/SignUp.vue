@@ -20,7 +20,12 @@ export default {
     Modal,
     SignupForm
   },
-  props: ['onShowModal'],
+  props: {
+    onShowModal: {
+      type: Function,
+      default: () => console.log('onShowModal')
+    }
+  },
   data: () => ({
     displayModal: true
   }),

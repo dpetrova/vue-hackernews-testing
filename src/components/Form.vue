@@ -57,14 +57,21 @@ export default {
     enterCompetition: 'yes'
   }),
   methods: {
-    onSubmit(event) {
-      console.log(event)
-      //   this.axios.post('http://demo7437963.mockable.io/validate', {
-      //     email: this.email,
-      //     enterCompetition: this.enterCompetition === 'yes'
-      //   })
+    onSubmit() {
+      //console.log(event)
+      this.axios.post('http://demo7437963.mockable.io/validate', {
+        email: this.email,
+        enterCompetition: this.enterCompetition === 'yes'
+      })
       this.$emit('form-submitted')
     }
   }
 }
 </script>
+
+<style>
+.is-grouped {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
