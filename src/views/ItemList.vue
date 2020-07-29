@@ -1,7 +1,9 @@
 <template>
-  <div class="item-list-view">
-    <div class="item-list">
-      <item v-for="item in displayItems" :key="item.id" :item="item" />
+  <div class="view">
+    <div class="item-list-view">
+      <div class="item-list">
+        <item v-for="item in displayItems" :key="item.id" :item="item" />
+      </div>
     </div>
   </div>
 </template>

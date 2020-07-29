@@ -1,19 +1,15 @@
 <template>
   <div id="app">
-    <header class="header" />
-    <div class="view">
-      <item-list />
-  </div>
+    <div id="nav" class="header">
+      <router-link to="/">Item List</router-link>
+      <router-link to="/signup">Sign Up</router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
-import ItemList from './views/ItemList.vue'
-export default {
-  components: {
-    ItemList
-  }
-}
+export default {}
 </script>
 
 <style>
@@ -26,9 +22,14 @@ body {
   color: #34495e;
   overflow-y: scroll;
 }
+#nav a.router-link-exact-active {
+  color: #34495e;
+}
 a {
   color: #34495e;
   text-decoration: none;
+  font-weight: bold;
+  padding: 10px;
 }
 li {
   list-style: none;
@@ -38,9 +39,11 @@ li {
   position: fixed;
   z-index: 999;
   height: 55px;
-  top: 0;
+  top: 10px;
   left: 0;
   right: 0;
+  display: flex;
+  justify-content: center;
 }
 .header .inner {
   max-width: 800px;
