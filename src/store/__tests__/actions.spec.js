@@ -10,7 +10,7 @@ describe('actions', () => {
     //create the data you need to pass in the tests
     const items = [{}, {}]
     const type = 'top'
-    //return a resolved promise with the items if fetchListData is called with the correct type
+    //use mocked api call to return a resolved promise with the items if fetchListData is called with the correct type
     //otherwise, returns an empty resolved promise
     fetchListData.mockImplementation(calledWith => {
       return calledWith === type ? Promise.resolve(items) : Promise.resolve()

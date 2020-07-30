@@ -33,6 +33,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "flush-promises": "^1.0.2",
     "jest": "^26.1.0",
+    "lodash.clonedeep": "^4.5.0",
     "prettier": "^1.19.1",
     "vue-jest": "^3.0.6",
     "vue-template-compiler": "^2.6.11"
