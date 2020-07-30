@@ -3,9 +3,10 @@ import { createLocalVue } from '@vue/test-utils'
 import cloneDeep from 'lodash.clonedeep'
 import flushPromises from 'flush-promises'
 import storeConfig from '../store-config'
-import { fetchListData } from '../../api/api'
+import { fetchListData } from '../../api/api' //import the mock fetchListData function to configure what it returns
 
-jest.mock('../../api/api') //mock api call
+//tell Jest to use the mock api file
+jest.mock('../../api/api')
 
 //creates a localVue constructor
 const localVue = createLocalVue()
@@ -20,6 +21,7 @@ function createItems() {
 
 describe('store-config', () => {
   test('calling fetchListData with the type returns top 20 displayItems from displayItems getter', async () => {
+    //set the number of assertions the test should run, so that the test fails if a promise is rejected
     expect.assertions(1)
     //create mock items for the test
     const items = createItems()
@@ -32,6 +34,13 @@ describe('store-config', () => {
     fetchListData.mockImplementation(calledType => {
       return calledType === type ? Promise.resolve(items) : Promise.resolve()
     })
+
+    //some mock implementations:
+    //fetchListData.mockImplementationOnce(() => Promise.resolve(items))
+    //fetchListData.mockResolvedValueOnce(items)
+    //fetchListData.mockImplementationOnce(() => Promise.reject())
+    //fetchListData.mockRejectedValueOnce()
+
     //dispatch the action
     store.dispatch('fetchListData', { type })
     //wait for pending promise to resolve

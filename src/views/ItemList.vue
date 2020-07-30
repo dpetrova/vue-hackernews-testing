@@ -2,7 +2,11 @@
   <div class="view">
     <div class="item-list-view">
       <div class="item-list">
-        <item v-for="item in displayItems" :key="item.id" :item="item" />
+        <item
+          v-for="item in $store.getters.displayItems"
+          :key="item.id"
+          :item="item"
+        />
       </div>
     </div>
   </div>
@@ -10,7 +14,7 @@
 
 <script>
 import Item from '../components/Item.vue'
-import { fetchListData } from '../api/api'
+
 export default {
   components: {
     Item
@@ -26,12 +30,17 @@ export default {
   methods: {
     loadItems() {
       this.$bar.start()
-      fetchListData('top')
+      this.$store
+        .dispatch('fetchListData', {
+          type: 'top'
+        })
         .then(items => {
           this.displayItems = items
           this.$bar.finish()
         })
-        .catch(() => this.$bar.fail())
+        .catch(() => {
+          this.$bar.fail()
+        })
     }
   }
 }
