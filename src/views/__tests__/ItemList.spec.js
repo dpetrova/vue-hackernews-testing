@@ -144,6 +144,63 @@ describe('ItemList.vue', () => {
     expect(wrapper.text()).toContain('2/5')
   })
 
+  test('calls $router.replace when the page parameter is greater than the max page count', async () => {
+    expect.assertions(1)
+    const store = createStore({
+      getters: {
+        maxPage: () => 5
+      }
+    })
+    const mocks = {
+      $route: {
+        params: {
+          page: '1000'
+        }
+      },
+      $router: {
+        replace: jest.fn()
+      }
+    }
+    createWrapper({ mocks, store })
+    await flushPromises()
+    //assert $router.replace was called with the correct arguments
+    expect(mocks.$router.replace).toHaveBeenCalledWith('/top/1')
+  })
+
+  test('calls $router.replace when the page parameter is 0', async () => {
+    expect.assertions(1)
+    const mocks = {
+      $route: {
+        params: {
+          page: '0'
+        }
+      },
+      $router: {
+        replace: jest.fn()
+      }
+    }
+    createWrapper({ mocks })
+    await flushPromises()
+    expect(mocks.$router.replace).toHaveBeenCalledWith('/top/1')
+  })
+
+  test('calls $router.replace when the page parameter is not a number', async () => {
+    expect.assertions(1)
+    const mocks = {
+      $route: {
+        params: {
+          page: 'abc'
+        }
+      },
+      $router: {
+        replace: jest.fn()
+      }
+    }
+    createWrapper({ mocks })
+    await flushPromises()
+    expect(mocks.$router.replace).toHaveBeenCalledWith('/top/1')
+  })
+
   test('calls $bar start on load', () => {
     //create a mocks object that contains a fake $bar object
     const mocks = {

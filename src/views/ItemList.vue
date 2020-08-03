@@ -59,7 +59,7 @@ export default {
             this.page &&
             (this.page > this.maxPage || this.page <= 0 || !Number(this.page))
           ) {
-            this.$router.replace(`/${this.type}/1`)
+            this.$router.replace(`/${this.type}/1`) //redirect to first page without page refresh
             return
           }
           this.displayItems = items
