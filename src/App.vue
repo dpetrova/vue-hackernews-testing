@@ -1,10 +1,16 @@
 <template>
   <div id="app">
     <div id="nav" class="header">
-      <router-link to="/">Item List</router-link>
+      <router-link to="/top">Top</router-link>
+      <router-link to="/new">New</router-link>
+      <router-link to="/show">Show</router-link>
+      <router-link to="/ask">Ask</router-link>
+      <router-link to="/job">Jobs</router-link>
       <router-link to="/signup">Sign Up</router-link>
     </div>
-    <router-view />
+    <div class="view">
+      <router-view :key="$route.params.type" />
+    </div>
   </div>
 </template>
 

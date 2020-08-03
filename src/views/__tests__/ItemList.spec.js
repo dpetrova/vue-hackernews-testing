@@ -51,6 +51,10 @@ describe('ItemList.vue', () => {
           start: jest.fn(),
           finish: jest.fn(),
           fail: jest.fn()
+        },
+        //make $route available as this.$route in ItemList
+        $route: {
+          params: { type: 'top' } //set a default type
         }
       },
       localVue,
@@ -89,17 +93,55 @@ describe('ItemList.vue', () => {
     })
   })
 
-  test('dispatches fetchListData with top items', async () => {
+  test('dispatches fetchListData with $route.params.type', async () => {
     expect.assertions(1)
+    //create a store using the factory function
     const store = createStore()
     //set dispatch to a mock function so you can check whether it was called correctly
     store.dispatch = jest.fn(() => Promise.resolve())
-    createWrapper({ store })
+    const type = 'a type'
+    //mock the $route.params.type value
+    const mocks = {
+      $route: {
+        params: {
+          type
+        }
+      }
+    }
+    createWrapper({ store, mocks })
     await flushPromises()
     //assert that dispatch was called with the correct arguments
-    expect(store.dispatch).toHaveBeenCalledWith('fetchListData', {
-      type: 'top'
+    expect(store.dispatch).toHaveBeenCalledWith('fetchListData', { type })
+  })
+
+  test('renders 1/5 when on page 1 of 5', () => {
+    const store = createStore({
+      //set the maxPage getter to return 5
+      getters: {
+        maxPage: () => 5
+      }
     })
+    const wrapper = createWrapper({ store })
+    //assert that ItemList renders “1/5”
+    expect(wrapper.text()).toContain('1/5')
+  })
+
+  test('renders 2/5 when on page 2 of 5', () => {
+    const store = createStore({
+      getters: {
+        maxPage: () => 5
+      }
+    })
+    //mock the $route.params.page value
+    const mocks = {
+      $route: {
+        params: {
+          page: '2'
+        }
+      }
+    }
+    const wrapper = createWrapper({ mocks, store })
+    expect(wrapper.text()).toContain('2/5')
   })
 
   test('calls $bar start on load', () => {
