@@ -261,8 +261,8 @@ describe('ItemList.vue', () => {
     }
     const wrapper = createWrapper({ mocks })
     //find the stubbed router-link with a RouterLinkStub selector
-    expect(wrapper.find(RouterLinkStub).props().to).toBe('/top/1')
-    expect(wrapper.find(RouterLinkStub).text()).toBe('< prev')
+    expect(wrapper.findComponent(RouterLinkStub).props().to).toBe('/top/1')
+    expect(wrapper.findComponent(RouterLinkStub).text()).toBe('< prev')
   })
 
   test('renders a RouterLink with the next page if one exists', () => {
@@ -277,8 +277,8 @@ describe('ItemList.vue', () => {
       }
     }
     const wrapper = createWrapper({ store, mocks })
-    expect(wrapper.find(RouterLinkStub).props().to).toBe('/top/2')
-    expect(wrapper.find(RouterLinkStub).text()).toBe('more >')
+    expect(wrapper.findComponent(RouterLinkStub).props().to).toBe('/top/2')
+    expect(wrapper.findComponent(RouterLinkStub).text()).toBe('more >')
   })
 
   test('renders a RouterLink with the next page when no page param exists', () => {
@@ -288,8 +288,8 @@ describe('ItemList.vue', () => {
       }
     })
     const wrapper = createWrapper({ store })
-    expect(wrapper.find(RouterLinkStub).props().to).toBe('/top/2')
-    expect(wrapper.find(RouterLinkStub).text()).toBe('more >')
+    expect(wrapper.findComponent(RouterLinkStub).props().to).toBe('/top/2')
+    expect(wrapper.findComponent(RouterLinkStub).text()).toBe('more >')
   })
 
   test('renders an <a> element without an href if there are no previous pages', () => {

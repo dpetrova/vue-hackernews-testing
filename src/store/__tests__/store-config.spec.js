@@ -2,7 +2,10 @@ import Vuex from 'vuex'
 import { createLocalVue } from '@vue/test-utils'
 import cloneDeep from 'lodash.clonedeep'
 import flushPromises from 'flush-promises'
+import Router from 'vue-router'
+import { sync } from 'vuex-router-sync'
 import storeConfig from '../store-config'
+import routerConfig from '../../router/router-config'
 import { fetchListData } from '../../api/api' //import the mock fetchListData function to configure what it returns
 
 //tell Jest to use the mock api file
@@ -12,6 +15,15 @@ jest.mock('../../api/api')
 const localVue = createLocalVue()
 //install Vuex on the localVue constructor
 localVue.use(Vuex)
+//install Vue Router on the localVue constructor
+localVue.use(Router)
+
+//create a new store instance
+const store = new Vuex.Store(storeConfig)
+//reate a new router instance
+const router = new Router(routerConfig)
+//sync the store and the router, so that the store contains a router object in its state
+sync(store, router)
 
 //helper function to create an array of 22 objects
 function createItems() {

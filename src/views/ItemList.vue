@@ -6,7 +6,7 @@
         <router-link v-if="page > 1" :to="'/' + type + '/' + (page - 1)">
           &lt; prev
         </router-link>
-        <a v-else>&lt; prev</a>
+        <a v-else class="disabled">&lt; prev</a>
         <span>{{ page || 1 }}/{{ maxPage }}</span>
         <router-link
           v-if="(page || 1) < maxPage"
@@ -14,7 +14,7 @@
         >
           more &gt;
         </router-link>
-        <a v-else>more &gt;</a>
+        <a v-else class="disabled">more &gt;</a>
       </div>
       <!-- items -->
       <div class="item-list">
