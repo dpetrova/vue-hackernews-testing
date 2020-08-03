@@ -1,4 +1,4 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import Vuex from 'vuex'
 import flushPromises from 'flush-promises' //using the flush-promises library
 import ItemList from '../ItemList.vue'
@@ -38,6 +38,7 @@ describe('ItemList.vue', () => {
     }
     //return a store with optional merged overrides, so you have a fresh store for each test
     return new Vuex.Store(mergeWith(defaultStoreConfig, overrides, customizer))
+    //return new Vuex.Store(merge(defaultStoreConfig, overrides))
   }
 
   //factory function to create wrapper object of a mounted component (accept optional overrides)
@@ -57,6 +58,10 @@ describe('ItemList.vue', () => {
           params: { type: 'top' } //set a default type
         }
       },
+      //stub all RouterLink components
+      stubs: {
+        RouterLink: RouterLinkStub
+      },
       localVue,
       store: createStore()
     }
@@ -67,6 +72,7 @@ describe('ItemList.vue', () => {
       ItemList,
       mergeWith(defaultMountingOptions, overrides, customizer)
     )
+    //return shallowMount(ItemList, merge(defaultMountingOptions, overrides))
   }
 
   //Stubbing a module dependency
@@ -245,5 +251,74 @@ describe('ItemList.vue', () => {
     createWrapper({ mocks, store })
     await flushPromises()
     expect(mocks.$bar.fail).toHaveBeenCalled()
+  })
+
+  test('renders a RouterLink with the previous page if one exists', () => {
+    const mocks = {
+      $route: {
+        params: { page: '2' }
+      }
+    }
+    const wrapper = createWrapper({ mocks })
+    //find the stubbed router-link with a RouterLinkStub selector
+    expect(wrapper.find(RouterLinkStub).props().to).toBe('/top/1')
+    expect(wrapper.find(RouterLinkStub).text()).toBe('< prev')
+  })
+
+  test('renders a RouterLink with the next page if one exists', () => {
+    const store = createStore({
+      getters: {
+        maxPage: () => 3
+      }
+    })
+    const mocks = {
+      $route: {
+        params: { page: '1' }
+      }
+    }
+    const wrapper = createWrapper({ store, mocks })
+    expect(wrapper.find(RouterLinkStub).props().to).toBe('/top/2')
+    expect(wrapper.find(RouterLinkStub).text()).toBe('more >')
+  })
+
+  test('renders a RouterLink with the next page when no page param exists', () => {
+    const store = createStore({
+      getters: {
+        maxPage: () => 3
+      }
+    })
+    const wrapper = createWrapper({ store })
+    expect(wrapper.find(RouterLinkStub).props().to).toBe('/top/2')
+    expect(wrapper.find(RouterLinkStub).text()).toBe('more >')
+  })
+
+  test('renders an <a> element without an href if there are no previous pages', () => {
+    const wrapper = createWrapper()
+    //assert that the <a> element doesn’t have an href
+    expect(wrapper.find('a').attributes().href).toBe(undefined)
+    //assert that the <a> element contains correct text
+    expect(wrapper.find('a').text()).toBe('< prev')
+  })
+
+  test('renders an <a> element without an href if there are no next pages', () => {
+    const store = createStore({
+      //set maxPage to 1, so there isn’t a next page to link to
+      getters: {
+        maxPage: () => 1
+      }
+    })
+    const wrapper = createWrapper({ store })
+    expect(
+      wrapper
+        .findAll('a')
+        .at(1)
+        .attributes().href
+    ).toBe(undefined)
+    expect(
+      wrapper
+        .findAll('a')
+        .at(1)
+        .text()
+    ).toBe('more >')
   })
 })

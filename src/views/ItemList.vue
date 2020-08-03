@@ -1,6 +1,7 @@
 <template>
   <div class="view">
     <div class="item-list-view">
+      <!-- pagination -->
       <div class="item-list-nav">
         <router-link v-if="page > 1" :to="'/' + type + '/' + (page - 1)">
           &lt; prev
@@ -15,6 +16,7 @@
         </router-link>
         <a v-else>more &gt;</a>
       </div>
+      <!-- items -->
       <div class="item-list">
         <item
           v-for="item in $store.getters.displayItems"
