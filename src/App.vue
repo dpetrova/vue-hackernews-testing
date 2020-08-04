@@ -11,11 +11,27 @@
     <div class="view">
       <router-view :key="$route.params.type" />
     </div>
+    <div id="footer">
+      <span>{{ getCurrentYear }}</span>
+    </div>
   </div>
 </template>
 
 <script>
-export default {}
+import { titleMixin } from './util/mixins.js'
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+export default {
+  mixins: [titleMixin],
+  computed: {
+    title() {
+      return `${capitalizeFirstLetter(this.$route.params.type)}`
+    }
+  }
+}
 </script>
 
 <style>
@@ -95,6 +111,25 @@ li {
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
+}
+#footer {
+  background-color: #f60;
+  color: white;
+  font-weight: bold;
+  vertical-align: text-bottom;
+  position: fixed;
+  z-index: 999;
+  height: 40px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+#footer > span {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 @media (max-width: 860px) {
   .header .inner {
