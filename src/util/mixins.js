@@ -18,9 +18,7 @@ export const titleMixin = {
     }
   },
   watch: {
-    $route(to, from) {
-      console.log(to)
-      console.log(from)
+    $route() {
       const title = getTitle(this)
       if (title) {
         document.title = `Vue HN | ${title}`

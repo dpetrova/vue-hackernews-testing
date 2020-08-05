@@ -3,7 +3,10 @@ import mutations from './mutations'
 import getters from './getters'
 
 const state = {
-  items: []
+  items: [],
+  item: null,
+  comments: {},
+  user: null
 }
 
 export default {

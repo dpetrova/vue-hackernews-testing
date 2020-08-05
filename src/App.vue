@@ -29,7 +29,11 @@ export default {
   mixins: [titleMixin],
   computed: {
     title() {
-      return `${capitalizeFirstLetter(this.$route.params.type)}`
+      return `${
+        this.$route.params.type
+          ? capitalizeFirstLetter(this.$route.params.type)
+          : ''
+      }`
     }
   }
 }

@@ -1,7 +1,7 @@
 import Item from '../Item.vue'
 //import Vue from 'vue'
-import { mount } from '@vue/test-utils'
-import { shallowMount } from '@vue/test-utils'
+//import { mount } from '@vue/test-utils'
+import { shallowMount, RouterLinkStub } from '@vue/test-utils'
 
 describe('Item.vue', () => {
   //create a mock item to pass in
@@ -30,25 +30,45 @@ describe('Item.vue', () => {
 
   //test host filter
   test('renders the hostname', () => {
-    const wrapper = shallowMount(Item, { propsData: { item } })
+    const wrapper = shallowMount(Item, {
+      propsData: { item },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
+    })
     //testing text content of elements
     expect(wrapper.text()).toContain('subdomain.domain.com')
   })
 
   test('renders item.by', () => {
-    const wrapper = shallowMount(Item, { propsData: { item } })
+    const wrapper = shallowMount(Item, {
+      propsData: { item },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
+    })
     //testing text content of elements
     expect(wrapper.text()).toContain(item.by)
   })
 
   test('renders item.score', () => {
-    const wrapper = shallowMount(Item, { propsData: { item } })
+    const wrapper = shallowMount(Item, {
+      propsData: { item },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
+    })
     //testing text content of elements
     expect(wrapper.text()).toContain(item.score)
   })
 
   test('renders a link to the item.url with item.title as text', () => {
-    const wrapper = shallowMount(Item, { propsData: { item } })
+    const wrapper = shallowMount(Item, {
+      propsData: { item },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
+    })
     const a = wrapper.find('a')
     //testing text content of elements
     expect(a.text()).toBe(item.title)
@@ -73,6 +93,9 @@ describe('Item.vue', () => {
     const wrapper = shallowMount(Item, {
       propsData: {
         item
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
       }
     })
     //restore the dateNow mock before running the assertion
