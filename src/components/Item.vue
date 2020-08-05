@@ -3,18 +3,23 @@
     <span class="score">{{ item.score }}</span>
     <span class="title">
       <a :href="item.url" target="_blank" rel="noopener">{{ item.title }}</a>
-      <span class="host"> ({{ item.url }})</span>
+      <span class="host"> ({{ item.url | host }})</span>
     </span>
-    <br>
+    <br />
     <span class="meta">
       <span class="by"> by {{ item.by }} </span>
+      <span> {{ item.time | timeAgo }} ago </span>
     </span>
   </li>
 </template>
 
 <script>
+//locally registered filter
+import { host } from '../util/filters.js'
+
 export default {
-  props: ['item']
+  props: ['item'],
+  filters: { host }
 }
 </script>
 

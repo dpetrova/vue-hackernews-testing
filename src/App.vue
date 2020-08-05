@@ -18,6 +18,7 @@
 </template>
 
 <script>
+//locally registered mixin
 import { titleMixin } from './util/mixins.js'
 
 function capitalizeFirstLetter(string) {

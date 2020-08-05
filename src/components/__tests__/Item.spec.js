@@ -4,9 +4,10 @@ import { mount } from '@vue/test-utils'
 import { shallowMount } from '@vue/test-utils'
 
 describe('Item.vue', () => {
+  //create a mock item to pass in
   const item = {
     title: 'Item',
-    url: 'http://google.com',
+    url: 'https://subdomain.domain.com/path',
     by: 'Pesho',
     score: 100
   }
@@ -27,10 +28,11 @@ describe('Item.vue', () => {
   //     expect(wrapper.text()).toContain('item')
   //   })
 
-  test('renders item.url', () => {
+  //test host filter
+  test('renders the hostname', () => {
     const wrapper = shallowMount(Item, { propsData: { item } })
     //testing text content of elements
-    expect(wrapper.text()).toContain(item.url)
+    expect(wrapper.text()).toContain('subdomain.domain.com')
   })
 
   test('renders item.by', () => {
@@ -52,5 +54,30 @@ describe('Item.vue', () => {
     expect(a.text()).toBe(item.title)
     //testing DOM attributes
     expect(a.attributes().href).toBe(item.url)
+  })
+
+  //test timeAgo filter
+  test('renders the time since the last post', () => {
+    //spy on the Date.now function
+    const dateNow = jest.spyOn(Date, 'now')
+    //mock dateNow to always call the same time
+    const dateNowTime = new Date('2020')
+    dateNow.mockImplementation(() => dateNowTime)
+
+    //create a mock item to pass in
+    const item = {
+      //create a UNIX time value that is 10 minutes ago from the mocked current time
+      time: dateNowTime / 1000 - 600
+    }
+    //mount the Item
+    const wrapper = shallowMount(Item, {
+      propsData: {
+        item
+      }
+    })
+    //restore the dateNow mock before running the assertion
+    dateNow.mockRestore()
+    //assert that the wrapper output contains 10 minutes ago
+    expect(wrapper.text()).toContain('10 minutes ago')
   })
 })

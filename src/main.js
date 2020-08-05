@@ -9,6 +9,7 @@ import ProgressBar from './components/ProgressBar'
 import storeConfig from './store/store-config'
 import routerConfig from './router/router-config'
 import { yearMixin } from './util/mixins'
+import { timeAgo } from './util/filters'
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
@@ -22,6 +23,8 @@ sync(store, router) //sync vuex and vue-router (the store will include a route o
 
 //register mixin globally
 Vue.mixin(yearMixin)
+//register filter globally
+Vue.filter('timeAgo', timeAgo)
 
 const bar = new Vue(ProgressBar).$mount() //create a mounted ProgressBar instance
 Vue.prototype.$bar = bar //add the mounted progress bar to the base Vue constructor prototype, which will be available to child component instances
