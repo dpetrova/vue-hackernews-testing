@@ -2,6 +2,7 @@ import ItemList from '../views/ItemList.vue'
 import SignUp from '../views/SignUp.vue'
 import ItemView from '../views/ItemView.vue'
 import UserView from '../views/UserView.vue'
+import NotFound from '../views/NotFound.vue'
 
 export default [
   {
@@ -17,5 +18,6 @@ export default [
     component: SignUp
   },
   { path: '/item/:id(\\d+)', component: ItemView },
-  { path: '/user/:id', component: UserView }
+  { path: '/user/:id', component: UserView },
+  { path: '/*', component: NotFound }
 ]
