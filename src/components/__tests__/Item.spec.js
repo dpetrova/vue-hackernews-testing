@@ -160,4 +160,26 @@ describe('Item.vue', () => {
     dateNow.mockRestore()
     expect(wrapper.element).toMatchSnapshot()
   })
+
+  test('renders correctly when item has no url', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2018')
+    dateNow.mockImplementation(() => dateNowTime)
+    const item = {
+      by: 'eddyerburgh',
+      id: 11122233,
+      score: 10,
+      time: dateNowTime / 1000 - 600,
+      title: 'vue-test-utils is released'
+    }
+    const wrapper = shallowMount(Item, {
+      propsData: {
+        item
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
+    })
+    expect(wrapper.element).toMatchSnapshot()
+  })
 })
