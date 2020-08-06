@@ -103,4 +103,61 @@ describe('Item.vue', () => {
     //assert that the wrapper output contains 10 minutes ago
     expect(wrapper.text()).toContain('10 minutes ago')
   })
+
+  /* snapshot tests */
+  test('renders correctly', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2020')
+    //mock the date so that Item always renders the same time
+    dateNow.mockImplementation(() => dateNowTime)
+
+    //create the mock data for Item to render
+    const item = {
+      by: 'eddyerburgh',
+      id: 11122233,
+      score: 10,
+      time: dateNowTime / 1000 - 600,
+      title: 'vue-test-utils is released',
+      type: 'story',
+      url: 'https://vue-test-utils.vuejs.org/'
+    }
+    //create a wrapper with an item prop
+    const wrapper = shallowMount(Item, {
+      propsData: {
+        item
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
+    })
+    //restore Date.now
+    dateNow.mockRestore()
+    //generate the snapshot
+    expect(wrapper.element).toMatchSnapshot()
+  })
+
+  test('renders correctly as job', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2020')
+    dateNow.mockImplementation(() => dateNowTime)
+    //create the mock data for Item to render with a job type
+    const item = {
+      by: 'eddyerburgh',
+      id: 11122233,
+      score: 10,
+      time: dateNowTime / 1000 - 600,
+      title: 'vue-test-utils is released',
+      type: 'job'
+    }
+    const wrapper = shallowMount(Item, {
+      propsData: {
+        item
+      },
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
+    })
+    dateNow.mockRestore()
+    expect(wrapper.element).toMatchSnapshot()
+  })
 })
