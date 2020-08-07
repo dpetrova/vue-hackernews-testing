@@ -4,7 +4,7 @@ To do that, use the setupFiles option
 */
 
 import Vue from 'vue'
-import { yearMixin } from './src/util/mixins'
+import { yearMixin, HTTPStatusMixin } from './src/util/mixins'
 import { timeAgo } from './src/util/filters'
 
 //set the Vue production tip to be false;
@@ -13,6 +13,7 @@ Vue.config.productionTip = false
 
 //globally register a mixin
 Vue.mixin(yearMixin)
+Vue.mixin(HTTPStatusMixin)
 
 //globally register a filter
 Vue.filter('timeAgo', timeAgo)

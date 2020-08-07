@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
@@ -18,13 +20,13 @@ function createRenderer(bundle, options) {
   )
 }
 
-let renderer
 const templatePath = path.resolve(__dirname, './src/index.template.html')
 
 const bundle = require('./dist/vue-ssr-server-bundle.json')
 const template = fs.readFileSync(templatePath, 'utf-8')
 const clientManifest = require('./dist/vue-ssr-client-manifest.json')
-renderer = createRenderer(bundle, {
+
+const renderer = createRenderer(bundle, {
   template,
   clientManifest
 })
@@ -81,6 +83,9 @@ app.get('*', (req, res) => {
         console.error(`error during render : ${req.url}`)
         console.error(err.stack)
       }
+    }
+    if (context.renderState) {
+      context.renderState()
     }
     res.status(context.HTTPStatus || 200)
     res.send(html)
