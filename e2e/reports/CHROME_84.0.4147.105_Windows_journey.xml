@@ -5,9 +5,9 @@
 
   <testsuite name="journey"
     errors="0" failures="0" hostname="" id="" package="journey" skipped="0"
-    tests="4" time="39.07" timestamp="">
+    tests="4" time="56.76" timestamp="">
   
-    <testcase name="clicking on a comments link redirects to the item page" classname="journey" time="6.269" assertions="3">
+    <testcase name="clicking on a comments link redirects to the item page" classname="journey" time="9.699" assertions="3">
 
     
 
@@ -16,7 +16,7 @@
     
     </testcase>
   
-    <testcase name="clicking on a user redirects to the user page" classname="journey" time="9.743" assertions="3">
+    <testcase name="clicking on a user redirects to the user page" classname="journey" time="15.89" assertions="3">
 
     
 
@@ -25,7 +25,7 @@
     
     </testcase>
   
-    <testcase name="paginates items correctly" classname="journey" time="11.22" assertions="5">
+    <testcase name="paginates items correctly" classname="journey" time="17.15" assertions="5">
 
     
 
@@ -38,7 +38,7 @@
     
     </testcase>
   
-    <testcase name="changes list by clicking through nav" classname="journey" time="11.84" assertions="5">
+    <testcase name="changes list by clicking through nav" classname="journey" time="14.03" assertions="5">
 
     
 

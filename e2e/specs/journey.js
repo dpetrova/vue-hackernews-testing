@@ -1,3 +1,8 @@
+/* 
+THESE TESTS ARE EXECUTED AGAINST RUNNING APP
+NEED TO START SERVER BEFORE RUN TESTS (npm run serve)
+*/
+
 module.exports = {
   'clicking on a comments link redirects to the item page': function(browser) {
     browser

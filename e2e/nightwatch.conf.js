@@ -8,7 +8,9 @@ module.exports = {
     port: 4444, //default Selenium Server port
     cli_args: {
       //set Nightwatch to start the Selenium process with the ChromeDriver path (using the path exported by the chromedriver package)
-      'WebDriver.chrome.driver': require('chromedriver').path
+      'WebDriver.chrome.driver': require('chromedriver').path,
+      //set Nightwatch to start the Selenium process with the Firefox Driver path (using the path exported by the geckdriver package)
+      'WebDriver.gecko.driver': require('geckodriver').path
     }
   },
   test_settings: {
@@ -37,6 +39,11 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         javascriptEnabled: true // turn off to test progressive enhancement
+      }
+    },
+    firefox: {
+      desiredCapabilities: {
+        browserName: 'firefox'
       }
     }
   }
