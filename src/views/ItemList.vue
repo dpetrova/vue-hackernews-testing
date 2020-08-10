@@ -71,6 +71,17 @@ export default {
           this.$bar.fail()
         })
     }
+  },
+  watch: {
+    page(newVal, oldVal) {
+      //show progress bar when navigate between pages
+      if (newVal !== oldVal) {
+        this.$bar.start()
+        setTimeout(() => {
+          this.$bar.finish()
+        }, 3000)
+      }
+    }
   }
 }
 </script>
