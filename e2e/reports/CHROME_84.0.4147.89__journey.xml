@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="0"
+            tests="1">
+
+  <testsuite name="journey"
+    errors="1" failures="0" hostname="" id="" package="journey" skipped="0"
+    tests="1" time="4.664" timestamp="">
+  
+    <testcase name="sanity test" classname="journey" time="4.664" assertions="0">
+    <error message="Error while running &#34;waitForElementVisible&#34; command: Error while trying to create HTTP request for &#34;/wd/hub/session/63fe6b9a56dc18ed70e5b5f4eb48aa71/element/[object Object]/displayed&#34;: Request path contains unescaped characters" type="error"><![CDATA[
+    TypeError [ERR_UNESCAPED_CHARACTERS]: Request path contains unescaped characters
+    at new ClientRequest (_http_client.js:139:13)
+    at Object.request (http.js:44:10)
+    at HttpRequest.createHttpRequest (D:\PROGRAMMING\Additional_courses\Testing\Testing Vue. Js Applications\vue-hackernews-app\node_modules\nightwatch\lib\http\request.js:138:55)
+    at HttpRequest.send (D:\PROGRAMMING\Additional_courses\Testing\Testing Vue. Js Applications\vue-hackernews-app\node_modules\nightwatch\lib\http\request.js:217:29)
+    at D:\PROGRAMMING\Additional_courses\Testing\Testing Vue. Js Applications\vue-hackernews-app\node_modules\nightwatch\lib\transport\transport.js:193:15
+    at new Promise (&lt;anonymous&gt;)
+    at Selenium2Protocol.sendProtocolAction (D:\PROGRAMMING\Additional_courses\Testing\Testing Vue. Js Applications\vue-hackernews-app\node_modules\nightwatch\lib\transport\transport.js:191:12)
+    at Selenium2Protocol.runProtocolAction (D:\PROGRAMMING\Additional_courses\Testing\Testing Vue. Js Applications\vue-hackernews-app\node_modules\nightwatch\lib\transport\jsonwire.js:61:17)
+    at Object.isElementDisplayed (D:\PROGRAMMING\Additional_courses\Testing\Testing Vue. Js Applications\vue-hackernews-app\node_modules\nightwatch\lib\transport\actions.js:54:10)
+    at Selenium2Protocol.executeProtocolAction (D:\PROGRAMMING\Additional_courses\Testing\Testing Vue. Js Applications\vue-hackernews-app\node_modules\nightwatch\lib\transport\transport.js:239:48)
+    ]]></error>
+    
+    </testcase>
+  
+
+  
+    <system-err>
+        TypeError: Error while running &#34;waitForElementVisible&#34; command: Error while trying to create HTTP request for &#34;/wd/hub/session/63fe6b9a56dc18ed70e5b5f4eb48aa71/element/[object Object]/displayed&#34;: Request path contains unescaped characters
+       at new ClientRequest (_http_client.js:139:13)
+       at Object.request (http.js:44:10)
+       at new Promise (&lt;anonymous&gt;)
+    </system-err>
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>
